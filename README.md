@@ -1,6 +1,6 @@
 # map-fn
 
-A set of utility function to map one type of values to another one with ease.
+A set of utility functions to map one type of values to another one with ease.
 
 ## Installation
 
