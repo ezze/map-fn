@@ -1,9 +1,9 @@
 # map-fn
 
-![https://www.npmjs.com/package/map-fn](https://img.shields.io/npm/v/map-fn)
+[![](https://img.shields.io/npm/v/map-fn)](https://www.npmjs.com/package/map-fn)
 [![Build](https://github.com/ezze/map-fn/actions/workflows/main.yml/badge.svg)](https://github.com/ezze/map-fn/actions/workflows/main.yml)
 [![Coverage Status](https://coveralls.io/repos/github/ezze/map-fn/badge.svg)](https://coveralls.io/github/ezze/map-fn)
-![https://github.com/ezze/map-fn/blob/HEAD/LICENSE.md](https://img.shields.io/github/license/ezze/map-fn)
+[![](https://img.shields.io/github/license/ezze/map-fn)](https://github.com/ezze/map-fn/blob/HEAD/LICENSE.md)
 
 A set of utility functions to map one type of values to another one with ease.
 
