@@ -32,3 +32,19 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+  test-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup
+        uses: ./.github/setup
+
+      - name: Test
+        run: pnpm test:coverage
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        

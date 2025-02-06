@@ -27,6 +27,7 @@
     "build": "tsc && vite build",
     "lint": "eslint .",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "prepublishOnly": "pnpm build"
   },
   "prettier": "prettier-config-ezze",
