@@ -195,7 +195,7 @@ const mapAB = createMapFnStrict<A, B>({
 }); // baz property is missing
 ```
 
-These is the full list of strict functions:
+This is the full list of strict functions:
 
 - `createMapFnStrict`;
 - `createMapFnStrictUndefined`;
