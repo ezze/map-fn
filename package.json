@@ -8,6 +8,13 @@
     "transform",
     "transformation"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezze/map-fn"
+  },
+  "bugs": {
+    "url": "https://github.com/ezze/map-fn/issues"
+  },
   "type": "module",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
