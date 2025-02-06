@@ -1,6 +1,8 @@
 name: Build library package
 run-name: ${{ github.actor }} is building library package
-on: push
+on:
+  - push
+  - pull_request
 
 jobs:
   build:
@@ -13,6 +15,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '22'
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: Install dependencies
         run: pnpm ---frozen-lockfile
