@@ -2,7 +2,7 @@ import { MappingError } from '../lib/error.ts';
 import { createMapFn, createMapFnStrict, createMapFnStrictUndefined, createMapFnUndefined } from '../lib/map.ts';
 import { MapFn, MapFnUndefined } from '../lib/types.ts';
 
-import { transformAtoB, mapAB, mapStrictAB } from './const.ts';
+import { mapAB, mapStrictAB, transformAtoB } from './const.ts';
 import { A, B } from './types.ts';
 
 describe('create map function', () => {

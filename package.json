@@ -1,6 +1,13 @@
 {
   "name": "map-fn",
   "version": "0.2.0",
+  "description": "A set of utility functions to map one type of values to another one with ease",
+  "keywords": [
+    "map",
+    "mapping",
+    "transform",
+    "transformation"
+  ],
   "type": "module",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",

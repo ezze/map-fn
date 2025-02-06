@@ -20,9 +20,9 @@ function reverseMap<I extends MapKey, O extends MapKey>(map: Partial<Record<I, O
 
 export function createReverseMapFn<I extends MapKey, O extends MapKey>(
   map: Partial<Record<I, O>>,
-  mapOptions?: ReverseMapFnOptions<I, O>
+  createMapOptions?: ReverseMapFnOptions<I, O>
 ): ReverseMapFn<I, O> {
-  return createMapFn<O, I>(reverseMap<I, O>(map), mapOptions);
+  return createMapFn<O, I>(reverseMap<I, O>(map), createMapOptions);
 }
 
 export function createReverseMapFnStrict<I extends MapKey, O extends MapKey>(map: Record<I, O>): ReverseMapFn<I, O> {
@@ -31,9 +31,9 @@ export function createReverseMapFnStrict<I extends MapKey, O extends MapKey>(map
 
 export function createReverseMapFnUndefined<I extends MapKey, O extends MapKey>(
   map: Partial<Record<I, O>>,
-  mapOptions?: ReverseMapFnUndefinedOptions<I, O>
+  createMapOptions?: ReverseMapFnUndefinedOptions<I, O>
 ): ReverseMapFnUndefined<I, O> {
-  return createMapFnUndefined<O, I>(reverseMap<I, O>(map), mapOptions);
+  return createMapFnUndefined<O, I>(reverseMap<I, O>(map), createMapOptions);
 }
 
 export function createReverseMapFnStrictUndefined<I extends MapKey, O extends MapKey>(
