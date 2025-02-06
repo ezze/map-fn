@@ -188,7 +188,7 @@ const mapAB = createMapFnStrict<A, B>({
 
 The following will trigger type checking error because mapping object is incomplete:
 
-```
+```typescript
 const mapAB = createMapFnStrict<A, B>({
   foo: 'FOO',
   bar: 'BAR'
