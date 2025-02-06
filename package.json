@@ -26,7 +26,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "pnpm build"
   },
   "prettier": "prettier-config-ezze",
   "devDependencies": {
