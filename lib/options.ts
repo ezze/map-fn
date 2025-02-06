@@ -1,13 +1,7 @@
-import {
-  MapFnInput,
-  MapFnOptions,
-  MapFnUndefinedOptions,
-  MapFnUndefinedWithOptions,
-  MapFnWithOptions
-} from './types.ts';
+import { MapKey, MapFnOptions, MapFnUndefinedOptions, MapFnUndefinedWithOptions, MapFnWithOptions } from './types.ts';
 import { isMapFnDefaultValueFn, validateCreateMapFnResult } from './utils.ts';
 
-export function createMapFnWithOptions<I extends MapFnInput, O, Options = object>(
+export function createMapFnWithOptions<I extends MapKey, O, Options = object>(
   map: Partial<Record<I, (options: Options) => O>>,
   createMapOptions?: MapFnOptions<I, O>
 ): MapFnWithOptions<I, O, Options> {
@@ -21,7 +15,7 @@ export function createMapFnWithOptions<I extends MapFnInput, O, Options = object
   };
 }
 
-export function createMapFnWithOptionsUndefined<I extends MapFnInput, O, Options = object>(
+export function createMapFnWithOptionsUndefined<I extends MapKey, O, Options = object>(
   map: Partial<Record<I, (options: Options) => O>>,
   createMapOptions?: MapFnUndefinedOptions<I, O>
 ): MapFnUndefinedWithOptions<I, O, Options> {

@@ -2,19 +2,18 @@ import { MappingError } from './error.ts';
 import {
   MapFnDefaultValueCombined,
   MapFnDefaultValueFn,
-  MapFnInput,
+  MapKey,
   MapFnOptions,
-  MapFnUndefinedOptions,
-  ReverseMapFnOptions
+  MapFnUndefinedOptions
 } from './types.ts';
 
-export function isMapFnDefaultValueFn<I extends MapFnInput, O>(
+export function isMapFnDefaultValueFn<I extends MapKey, O>(
   defaultValue: MapFnDefaultValueCombined<I, O>
 ): defaultValue is MapFnDefaultValueFn<I, O> {
   return typeof defaultValue === 'function';
 }
 
-export function validateCreateMapFnResult<I extends MapFnInput, O>(
+export function validateCreateMapFnResult<I extends MapKey, O>(
   input: I,
   output: O | undefined,
   createMapOptions?: MapFnOptions<I, O>,
@@ -38,7 +37,7 @@ export function validateCreateMapFnResult<I extends MapFnInput, O>(
   return o;
 }
 
-export function validateCreateMapFnUndefinedResult<I extends MapFnInput, O>(
+export function validateCreateMapFnUndefinedResult<I extends MapKey, O>(
   input: I,
   output: O | undefined,
   createMapOptions?: MapFnUndefinedOptions<I, O>,
@@ -56,25 +55,4 @@ export function validateCreateMapFnUndefinedResult<I extends MapFnInput, O>(
     return isMapFnDefaultValueFn<I, O>(defaultValue) ? defaultValue(input) : defaultValue;
   }
   return o;
-}
-
-export function validateCreateReverseMapFnResult<I extends MapFnInput, O>(
-  output: O,
-  input: I | undefined,
-  options?: ReverseMapFnOptions<I, O>
-): I {
-  const {
-    customTransformer,
-    defaultValue,
-    errorMessage = (output: O) => `Unable to map "${output}", default value is not provided`
-  } = options || {};
-
-  const i = input === undefined && typeof customTransformer === 'function' ? customTransformer(output) : input;
-  if (i === undefined) {
-    if (defaultValue === undefined) {
-      throw new MappingError(errorMessage(output));
-    }
-    return defaultValue;
-  }
-  return i;
 }

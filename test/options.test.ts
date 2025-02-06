@@ -1,4 +1,4 @@
-import { createMapFnWithOptions } from '../options.ts';
+import { createMapFnWithOptions } from '../lib/options.ts';
 
 describe('create map function with options', () => {
   type A = 'foo' | 'bar' | 'baz' | 'foobar' | 'barbaz';

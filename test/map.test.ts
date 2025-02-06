@@ -1,21 +1,11 @@
-import { MappingError } from '../error.ts';
-import { createMapFn, createMapFnUndefined } from '../map.ts';
-import { MapFn, MapFnCustomTransformer, MapFnUndefined } from '../types.ts';
+import { MappingError } from '../lib/error.ts';
+import { createMapFn, createMapFnStrict, createMapFnStrictUndefined, createMapFnUndefined } from '../lib/map.ts';
+import { MapFn, MapFnUndefined } from '../lib/types.ts';
 
-type A = 'foo' | 'bar' | 'baz' | 'foobar' | 'barbaz';
-type B = 'FOO' | 'BAR' | 'BAZ' | 'DEFAULT' | 'CUSTOM' | 'ANOTHER_CUSTOM';
+import { transformAtoB, mapAB, mapStrictAB } from './const.ts';
+import { A, B } from './types.ts';
 
 describe('create map function', () => {
-  const mapAB: Partial<Record<A, B>> = {
-    foo: 'FOO',
-    bar: 'BAR',
-    baz: 'BAZ'
-  };
-
-  const customTransformer: MapFnCustomTransformer<A, B> = (input) => {
-    return input === 'foobar' ? 'CUSTOM' : 'ANOTHER_CUSTOM';
-  };
-
   function testExisting(mapFn: MapFn<A, B> | MapFnUndefined<A, B>): void {
     expect(mapFn('foo')).toBe('FOO');
     expect(mapFn('bar')).toBe('BAR');
@@ -35,9 +25,9 @@ describe('create map function', () => {
     mapFn: MapFn<A, B> | MapFnUndefined<A, B>,
     mapFnCustom: MapFn<A, B> | MapFnUndefined<A, B>
   ): void {
-    expect(mapFn('foo', { customTransformer })).toBe('FOO');
-    expect(mapFn('foobar', { customTransformer })).toBe('CUSTOM');
-    expect(mapFn('barbaz', { customTransformer })).toBe('ANOTHER_CUSTOM');
+    expect(mapFn('foo', { customTransformer: transformAtoB })).toBe('FOO');
+    expect(mapFn('foobar', { customTransformer: transformAtoB })).toBe('CUSTOM');
+    expect(mapFn('barbaz', { customTransformer: transformAtoB })).toBe('ANOTHER_CUSTOM');
     expect(mapFnCustom('foo')).toBe('FOO');
     expect(mapFnCustom('foobar')).toBe('CUSTOM');
     expect(mapFnCustom('barbaz')).toBe('ANOTHER_CUSTOM');
@@ -45,14 +35,16 @@ describe('create map function', () => {
 
   describe('core', () => {
     const mapFn = createMapFn<A, B>(mapAB);
+    const mapFnStrict = createMapFnStrict<A, B>(mapStrictAB);
     const mapFnDefault = createMapFn<A, B>(mapAB, { defaultValue: 'DEFAULT' });
     const mapFnErrorMessage = createMapFn<A, B>(mapAB, {
-      errorMessage: (input: A) => `No output value for input "${input}"`
+      errorMessage: (input: A): string => `No output value for input "${input}"`
     });
-    const mapFnCustom = createMapFn<A, B>(mapAB, { customTransformer });
+    const mapFnCustom = createMapFn<A, B>(mapAB, { customTransformer: transformAtoB });
 
     test('get existing value', () => {
       testExisting(mapFn);
+      testExisting(mapFnStrict);
       testExisting(mapFnDefault);
       testExisting(mapFnErrorMessage);
       testExisting(mapFnCustom);
@@ -77,11 +69,13 @@ describe('create map function', () => {
 
   describe('undefined as default', () => {
     const mapFn = createMapFnUndefined<A, B>(mapAB);
+    const mapFnStrict = createMapFnStrictUndefined<A, B>(mapStrictAB);
     const mapFnDefault = createMapFnUndefined<A, B>(mapAB, { defaultValue: 'DEFAULT' });
-    const mapFnCustom = createMapFn<A, B>(mapAB, { customTransformer });
+    const mapFnCustom = createMapFn<A, B>(mapAB, { customTransformer: transformAtoB });
 
     test('get existing value', () => {
       testExisting(mapFn);
+      testExisting(mapFnStrict);
       testExisting(mapFnDefault);
       testExisting(mapFnCustom);
     });
