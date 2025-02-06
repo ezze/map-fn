@@ -1,6 +1,7 @@
 # map-fn
 
 ![](https://img.shields.io/npm/v/map-fn)
+![](https://img.shields.io/github/license/ezze/map-fn)
 
 A set of utility functions to map one type of values to another one with ease.
 
@@ -118,6 +119,8 @@ There are few options available to avoid `MappingError` in such cases:
    console.log(mapAB('baz')); // undefined
    ```
    
+Please note that `defaultValue` can also be a function similar to `customTransformer` except it can't return `undefined`. You can combine both `customTransformer` and `defaultValue`, the former takes precedence.
+   
 ## Reverse mapping
 
 Sometimes you may want to make backward transformations without need to declare reversed map. `createReverseMap` and `createReverseMapUndefined` functions are created for this purpose. The only restriction here is that type of original map values must extend `number` or `string`.
@@ -132,7 +135,74 @@ console.log(mapBA('FOO')); // 'foo'
 console.log(mapBA('BAR')); // 'bar'
 ```
 
-The same default value options as for basic mapping function creators are available for reverse function creators, the difference is input/output generic types are swapped.
+The same options as for basic mapping function creators are available for reverse function creators, the difference is input/output generic types are swapped.
+
+## Mapping with argument
+
+For advanced cases one may consider using `createArgumentMapFn` or `createArgumentMapFnUndefined` mapping function creators. They provide additional input argument in mapping configuration:
+
+```typescript
+import { createArgumentMapFn } from '../lib';
+
+abstract class Person {
+  id: number;
+
+  constructor(id: number) {
+    this.id = id;
+  }
+  
+  ...
+}
+
+class Musician implements Person { ... }
+
+class Poet implements Person { ...}
+
+type PersonType = 'musician' | 'poet';
+
+const mapPerson = createArgumentMapFn<PersonType, Person, number>({
+  musician: (id) => new Musician(id),
+  poet: (id) => new Poet(id)
+});
+
+const musician = mapPerson('musician', 1);
+console.log(musician instanceof Musician); // true
+console.log(musician instanceof Poet); // false
+
+const poet = mapPerson('poet', 2);
+console.log(poet instanceof Musician); // false
+console.log(poet instanceof Poet); // true
+```
+
+## Strict
+
+Mapping functions described above don't guarantee that all input values have matched output ones (that's why `defaultValue` and `customTransformer` exist). If you want to control exhaustive matches between input and output values in TypeScript then strict functions come to the party:
+
+```typescript
+const mapAB = createMapFnStrict<A, B>({
+  foo: 'FOO',
+  bar: 'BAR',
+  baz: 'BAZ'
+});
+```
+
+The following will trigger type checking error because mapping object is incomplete:
+
+```
+const mapAB = createMapFnStrict<A, B>({
+  foo: 'FOO',
+  bar: 'BAR'
+}); // baz property is missing
+```
+
+These is the full list of strict functions:
+
+- `createMapFnStrict`;
+- `createMapFnStrictUndefined`;
+- `createReverseMapFnStrict`;
+- `createReverseMapFnStrictUndefined`;
+- `createArgumentMapFnStrict`;
+- `createArgumentMapFnStrictUndefined`.
 
 ## License
 

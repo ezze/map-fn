@@ -38,7 +38,7 @@ describe('create reverse map function', () => {
     expect(mapFnCustom('ANOTHER_CUSTOM')).toBe('foo');
   }
 
-  describe('core', () => {
+  describe('basic', () => {
     const mapFn = createReverseMapFn<A, B>(mapAB);
     const mapFnStrict = createReverseMapFnStrict<A, B>(mapStrictAB);
     const mapFnDefault = createReverseMapFn<A, B>(mapAB, { defaultValue: 'foo' });

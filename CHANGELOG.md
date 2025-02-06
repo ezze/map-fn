@@ -1,9 +1,10 @@
 # Changelog
 
-## 0.2.0
+## 0.2.0 (2025-02-07)
 
-- Add strict mapping function creators requiring full input => output matching.
-- Reverse mapping function creators are reimplemented.
+- Strict mapping function creators requiring full input => output matching are added.
+- Reverse and argument (with options) mapping function creators are refactored.
+- More units tests are added
 
 ## 0.1.0 (2024-12-06)
 

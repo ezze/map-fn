@@ -1,14 +1,14 @@
 import { MappingError } from './error.ts';
 import {
-  MapFnDefaultValueCombined,
-  MapFnDefaultValueFn,
-  MapKey,
-  MapFnOptions,
-  MapFnUndefinedOptions,
-  ArgumentMapFnOptions,
   ArgumentMapFnDefaultValueCombined,
   ArgumentMapFnDefaultValueFn,
-  ArgumentMapFnUndefinedOptions
+  ArgumentMapFnOptions,
+  ArgumentMapFnUndefinedOptions,
+  MapFnDefaultValueCombined,
+  MapFnDefaultValueFn,
+  MapFnOptions,
+  MapFnUndefinedOptions,
+  MapKey
 } from './types.ts';
 
 export function isMapFnDefaultValueFn<I extends MapKey, O>(

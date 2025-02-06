@@ -1,4 +1,4 @@
-import { MapFn, MapKey, MapFnOptions, MapFnUndefined, MapFnUndefinedOptions } from './types.ts';
+import { MapFn, MapFnOptions, MapFnUndefined, MapFnUndefinedOptions, MapKey } from './types.ts';
 import { validateCreateMapFnResult, validateCreateMapFnUndefinedResult } from './utils.ts';
 
 export function createMapFn<I extends MapKey, O>(

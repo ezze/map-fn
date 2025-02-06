@@ -33,7 +33,7 @@ describe('create map function', () => {
     expect(mapFnCustom('barbaz')).toBe('ANOTHER_CUSTOM');
   }
 
-  describe('core', () => {
+  describe('basic', () => {
     const mapFn = createMapFn<A, B>(mapAB);
     const mapFnStrict = createMapFnStrict<A, B>(mapStrictAB);
     const mapFnDefault = createMapFn<A, B>(mapAB, { defaultValue: 'DEFAULT' });
