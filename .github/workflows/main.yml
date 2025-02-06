@@ -1,10 +1,11 @@
-name: Build library package
+name: Build
 run-name: ${{ github.actor }} is building library package
 on:
   - push
   - pull_request
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -16,6 +17,7 @@ jobs:
 
       - name: Build
         run: pnpm build
+
   test:
     runs-on: ubuntu-latest
     steps:

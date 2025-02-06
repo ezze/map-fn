@@ -1,6 +1,7 @@
 # map-fn
 
 ![https://www.npmjs.com/package/map-fn](https://img.shields.io/npm/v/map-fn)
+[![Build](https://github.com/ezze/map-fn/actions/workflows/main.yml/badge.svg)](https://github.com/ezze/map-fn/actions/workflows/main.yml)
 ![https://github.com/ezze/map-fn/blob/HEAD/LICENSE.md](https://img.shields.io/github/license/ezze/map-fn)
 
 A set of utility functions to map one type of values to another one with ease.
