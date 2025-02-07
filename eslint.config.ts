@@ -1,6 +1,9 @@
-import eslintEzzePrettierConfig from 'eslint-config-ezze-prettier';
-import eslintEzzeTypeScriptConfig from 'eslint-config-ezze-ts';
+import { Linter } from 'eslint';
+import ezzePrettier from 'eslint-config-ezze-prettier';
+import ezzeTypeScript from 'eslint-config-ezze-ts';
 import globals from 'globals';
+
+const config: Array<Linter.Config> = [...ezzeTypeScript, ...ezzePrettier];
 
 export default [
   { ignores: ['dist', 'node_modules'] },
@@ -14,6 +17,5 @@ export default [
       }
     }
   },
-  ...eslintEzzeTypeScriptConfig,
-  ...eslintEzzePrettierConfig
+  ...config
 ];
