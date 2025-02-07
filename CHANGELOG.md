@@ -1,5 +1,7 @@
 # Changelog
 
+- Libraries are updated, `vite-plugin-checker` is added.
+
 ## 0.2.0 (2025-02-07)
 
 - Strict mapping function creators requiring full input => output matching are added.

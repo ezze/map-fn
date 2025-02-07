@@ -13,6 +13,26 @@ A set of utility functions to map one type of values to another one with ease.
 pnpm add map-fn -P
 ```
 
+## Build
+
+```
+pnpm build
+```
+
+## Develop
+
+```
+pnpm dev
+```
+
+## Test
+
+```
+pnpm lint
+pnpm test
+pnpm test:coverage
+```
+
 ## Basic usage
 
 ```typescript
