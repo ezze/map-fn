@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.0 (2025-04-18)
+
+- Add library `exports` property to `package.json`, specify Common.js module in `main`.
 - Libraries are updated, `vite-plugin-checker` is added.
 
 ## 0.2.0 (2025-02-07)
