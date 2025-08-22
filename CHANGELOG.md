@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (2025-08-22)
+
+- Fix `exports` field for `types` in `package.json`.
+
 ## 0.3.0 (2025-04-18)
 
 - Add library `exports` property to `package.json`, specify Common.js module in `main`.
