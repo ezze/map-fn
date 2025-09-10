@@ -32,3 +32,5 @@ export {
   // Error
   MappingError
 };
+
+export type * from './types.ts';

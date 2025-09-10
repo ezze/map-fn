@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2 (2025-09-10)
+
+- Export types.
+
 ## 0.3.1 (2025-08-22)
 
 - Fix `exports` field for `types` in `package.json`.
