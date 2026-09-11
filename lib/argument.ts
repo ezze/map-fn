@@ -4,11 +4,12 @@ import {
   ArgumentMapFnResolver,
   ArgumentMapFnUndefined,
   ArgumentMapFnUndefinedOptions,
-  MapKey
+  MapKey,
+  MapOutput
 } from './types.ts';
 import { validateCreateArgumentMapFnResult, validateCreateArgumentMapFnUndefinedResult } from './utils.ts';
 
-export function createArgumentMapFn<I extends MapKey, O, A = object>(
+export function createArgumentMapFn<I extends MapKey, O extends MapOutput, A = object>(
   map: Partial<Record<I, (argument: A) => O>>,
   createMapOptions?: ArgumentMapFnOptions<I, O, A>
 ): ArgumentMapFn<I, O, A> {
@@ -19,13 +20,13 @@ export function createArgumentMapFn<I extends MapKey, O, A = object>(
   };
 }
 
-export function createArgumentMapFnStrict<I extends MapKey, O, A = object>(
+export function createArgumentMapFnStrict<I extends MapKey, O extends MapOutput, A = object>(
   map: Record<I, ArgumentMapFnResolver<O, A>>
 ): ArgumentMapFn<I, O, A> {
   return createArgumentMapFn<I, O, A>(map);
 }
 
-export function createArgumentMapFnUndefined<I extends MapKey, O, A = object>(
+export function createArgumentMapFnUndefined<I extends MapKey, O extends MapOutput, A = object>(
   map: Partial<Record<I, (options: A) => O>>,
   createMapOptions?: ArgumentMapFnUndefinedOptions<I, O, A>
 ): ArgumentMapFnUndefined<I, O, A> {
@@ -36,7 +37,7 @@ export function createArgumentMapFnUndefined<I extends MapKey, O, A = object>(
   };
 }
 
-export function createArgumentMapFnStrictUndefined<I extends MapKey, O, A = object>(
+export function createArgumentMapFnStrictUndefined<I extends MapKey, O extends MapOutput, A = object>(
   map: Record<I, ArgumentMapFnResolver<O, A>>
 ): ArgumentMapFnUndefined<I, O, A> {
   return createArgumentMapFnUndefined<I, O, A>(map);

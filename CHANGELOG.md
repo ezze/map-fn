@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0 (2026-09-11)
+
+- Default function evaluation became more strict.
+
 ## 0.3.2 (2025-09-10)
 
 - Export types.

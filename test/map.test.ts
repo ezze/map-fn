@@ -21,6 +21,15 @@ describe('create map function', () => {
     expect(mapFnDefault('foobar', { defaultValue: 'CUSTOM' })).toBe('CUSTOM');
   }
 
+  function testDefaultFn(
+    mapFn: MapFn<A, B> | MapFnUndefined<A, B>,
+    mapFnDefaultFn: MapFn<A, B> | MapFnUndefined<A, B>
+  ): void {
+    expect(mapFn('foobar', { defaultValue: () => 'DEFAULT' })).toBe('DEFAULT');
+    expect(mapFnDefaultFn('foobar')).toBe('DEFAULT');
+    expect(mapFnDefaultFn('foobar', { defaultValue: () => 'CUSTOM' })).toBe('CUSTOM');
+  }
+
   function testCustomTransformation(
     mapFn: MapFn<A, B> | MapFnUndefined<A, B>,
     mapFnCustom: MapFn<A, B> | MapFnUndefined<A, B>
@@ -37,6 +46,7 @@ describe('create map function', () => {
     const mapFn = createMapFn<A, B>(mapAB);
     const mapFnStrict = createMapFnStrict<A, B>(mapStrictAB);
     const mapFnDefault = createMapFn<A, B>(mapAB, { defaultValue: 'DEFAULT' });
+    const mapFnDefaultFn = createMapFn<A, B>(mapAB, { defaultValue: () => 'DEFAULT' });
     const mapFnErrorMessage = createMapFn<A, B>(mapAB, {
       errorMessage: (input: A): string => `No output value for input "${input}"`
     });
@@ -46,12 +56,17 @@ describe('create map function', () => {
       testExisting(mapFn);
       testExisting(mapFnStrict);
       testExisting(mapFnDefault);
+      testExisting(mapFnDefaultFn);
       testExisting(mapFnErrorMessage);
       testExisting(mapFnCustom);
     });
 
     test('provide default value', () => {
       testDefault(mapFn, mapFnDefault);
+    });
+
+    test('provide default value function', () => {
+      testDefaultFn(mapFn, mapFnDefaultFn);
     });
 
     test('throw on non-existing value', () => {
@@ -71,17 +86,23 @@ describe('create map function', () => {
     const mapFn = createMapFnUndefined<A, B>(mapAB);
     const mapFnStrict = createMapFnStrictUndefined<A, B>(mapStrictAB);
     const mapFnDefault = createMapFnUndefined<A, B>(mapAB, { defaultValue: 'DEFAULT' });
+    const mapFnDefaultFn = createMapFnUndefined<A, B>(mapAB, { defaultValue: () => 'DEFAULT' });
     const mapFnCustom = createMapFn<A, B>(mapAB, { customTransformer: transformAtoB });
 
     test('get existing value', () => {
       testExisting(mapFn);
       testExisting(mapFnStrict);
       testExisting(mapFnDefault);
+      testExisting(mapFnDefaultFn);
       testExisting(mapFnCustom);
     });
 
     test('provide default value', () => {
       testDefault(mapFn, mapFnDefault);
+    });
+
+    test('provide default value function', () => {
+      testDefaultFn(mapFn, mapFnDefaultFn);
     });
 
     test("don't throw on non-existing value", () => {
