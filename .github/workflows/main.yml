@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Setup
-        uses: .github/setup
+        uses: ./.github/setup
 
       - name: Build
         run: pnpm build
@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Setup
-        uses: .github/setup
+        uses: ./.github/setup
 
       - name: Lint
         run: pnpm lint
@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Setup
-        uses: .github/setup
+        uses: ./.github/setup
 
       - name: Test
         run: pnpm test:coverage

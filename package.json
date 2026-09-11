@@ -41,7 +41,7 @@
     "lint": "eslint lib",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm lint && pnpm test && pnpm build"
   },
   "prettier": "prettier-config-ezze",
   "devDependencies": {
