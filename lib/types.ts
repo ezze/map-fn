@@ -15,8 +15,7 @@ export type ArgumentMapFnCustomTransformer<I extends MapKey, O, A = 'object'> = 
 
 export type ArgumentMapFnDefaultValueFn<I extends MapKey, O, A = 'object'> = (input: I, argument: A) => O;
 export type ArgumentMapFnDefaultValueCombined<I extends MapKey, O, A = 'object'> =
-  | MapFnDefaultValue<O>
-  | ArgumentMapFnDefaultValueFn<I, O, A>;
+  MapFnDefaultValue<O> | ArgumentMapFnDefaultValueFn<I, O, A>;
 
 export type ArgumentMapFnErrorMessage<I extends MapKey, A = 'object'> = (input: I, argument: A) => string;
 
