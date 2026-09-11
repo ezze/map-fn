@@ -1,0 +1,7 @@
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: true
+  unrs-resolver: false
+minimumReleaseAgeExclude:
+  - eslint-config-ezze-prettier@1.0.0-alpha.2
+  - eslint-config-ezze-ts@1.0.0-alpha.3
