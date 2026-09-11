@@ -98,4 +98,14 @@ describe('create reverse map function', () => {
       testCustomTransformation(mapFn, mapFnCustom);
     });
   });
+
+  describe('numeric keys', () => {
+    const mapNumberToString: Partial<Record<number, string>> = { 1: 'one', 2: 'two' };
+
+    test('convert numeric string keys back to numbers', () => {
+      const mapFn = createReverseMapFn<number, string>(mapNumberToString);
+      expect(mapFn('one')).toBe(1);
+      expect(mapFn('two')).toBe(2);
+    });
+  });
 });

@@ -21,6 +21,15 @@ describe('create map function', () => {
     expect(mapFnDefault('foobar', { defaultValue: 'CUSTOM' })).toBe('CUSTOM');
   }
 
+  function testDefaultFn(
+    mapFn: MapFn<A, B> | MapFnUndefined<A, B>,
+    mapFnDefaultFn: MapFn<A, B> | MapFnUndefined<A, B>
+  ): void {
+    expect(mapFn('foobar', { defaultValue: () => 'DEFAULT' })).toBe('DEFAULT');
+    expect(mapFnDefaultFn('foobar')).toBe('DEFAULT');
+    expect(mapFnDefaultFn('foobar', { defaultValue: () => 'CUSTOM' })).toBe('CUSTOM');
+  }
+
   function testCustomTransformation(
     mapFn: MapFn<A, B> | MapFnUndefined<A, B>,
     mapFnCustom: MapFn<A, B> | MapFnUndefined<A, B>
@@ -56,6 +65,10 @@ describe('create map function', () => {
       testDefault(mapFn, mapFnDefault);
     });
 
+    test('provide default value function', () => {
+      testDefaultFn(mapFn, mapFnDefaultFn);
+    });
+
     test('throw on non-existing value', () => {
       expect(() => mapFn('foobar')).toThrow(new MappingError('Unable to map "foobar", default value is not provided'));
       expect(() => mapFn('foobar', { errorMessage: (input: A) => `Output is not found for "${input}"` })).toThrow(
@@ -86,6 +99,10 @@ describe('create map function', () => {
 
     test('provide default value', () => {
       testDefault(mapFn, mapFnDefault);
+    });
+
+    test('provide default value function', () => {
+      testDefaultFn(mapFn, mapFnDefaultFn);
     });
 
     test("don't throw on non-existing value", () => {
