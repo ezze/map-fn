@@ -45,8 +45,7 @@
   },
   "prettier": "prettier-config-ezze",
   "devDependencies": {
-    "@stylistic/eslint-plugin-js": "^4.4.1",
-    "@stylistic/eslint-plugin-ts": "^4.4.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.1",
     "eslint": "^10.10.0",
