@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Setup
-        uses: ./.github/setup
+        uses: .github/setup
 
       - name: Build
         run: pnpm build
@@ -22,10 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Setup
-        uses: ./.github/setup
+        uses: .github/setup
 
       - name: Lint
         run: pnpm lint
@@ -37,10 +37,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Setup
-        uses: ./.github/setup
+        uses: .github/setup
 
       - name: Test
         run: pnpm test:coverage
