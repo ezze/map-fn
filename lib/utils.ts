@@ -1,29 +1,14 @@
 import { MappingError } from './error.ts';
 import {
-  ArgumentMapFnDefaultValueCombined,
-  ArgumentMapFnDefaultValueFn,
   ArgumentMapFnOptions,
   ArgumentMapFnUndefinedOptions,
-  MapFnDefaultValueCombined,
-  MapFnDefaultValueFn,
   MapFnOptions,
   MapFnUndefinedOptions,
-  MapKey
+  MapKey,
+  MapOutput
 } from './types.ts';
 
-export function isMapFnDefaultValueFn<I extends MapKey, O>(
-  defaultValue: MapFnDefaultValueCombined<I, O>
-): defaultValue is MapFnDefaultValueFn<I, O> {
-  return typeof defaultValue === 'function' && defaultValue.length === 1;
-}
-
-export function isArgumentMapFnDefaultValueFn<I extends MapKey, O, A = 'object'>(
-  defaultValue: ArgumentMapFnDefaultValueCombined<I, O, A>
-): defaultValue is ArgumentMapFnDefaultValueFn<I, O, A> {
-  return typeof defaultValue === 'function' && defaultValue.length === 2;
-}
-
-export function validateCreateMapFnResult<I extends MapKey, O>(
+export function validateCreateMapFnResult<I extends MapKey, O extends MapOutput>(
   input: I,
   output: O | undefined,
   createMapOptions?: MapFnOptions<I, O>,
@@ -42,12 +27,12 @@ export function validateCreateMapFnResult<I extends MapKey, O>(
     if (defaultValue === undefined) {
       throw new MappingError(errorMessage(input));
     }
-    return isMapFnDefaultValueFn<I, O>(defaultValue) ? defaultValue(input) : defaultValue;
+    return typeof defaultValue === 'function' ? defaultValue(input) : defaultValue;
   }
   return o;
 }
 
-export function validateCreateMapFnUndefinedResult<I extends MapKey, O>(
+export function validateCreateMapFnUndefinedResult<I extends MapKey, O extends MapOutput>(
   input: I,
   output: O | undefined,
   createMapOptions?: MapFnUndefinedOptions<I, O>,
@@ -62,12 +47,12 @@ export function validateCreateMapFnUndefinedResult<I extends MapKey, O>(
     if (defaultValue === undefined) {
       return undefined;
     }
-    return isMapFnDefaultValueFn<I, O>(defaultValue) ? defaultValue(input) : defaultValue;
+    return typeof defaultValue === 'function' ? defaultValue(input) : defaultValue;
   }
   return o;
 }
 
-export function validateCreateArgumentMapFnResult<I extends MapKey, O, A = 'object'>(
+export function validateCreateArgumentMapFnResult<I extends MapKey, O extends MapOutput, A = 'object'>(
   input: I,
   output: O | undefined,
   argument: A,
@@ -91,12 +76,12 @@ export function validateCreateArgumentMapFnResult<I extends MapKey, O, A = 'obje
     if (defaultValue === undefined) {
       throw new MappingError(errorMessage(input, argument));
     }
-    return isArgumentMapFnDefaultValueFn<I, O, A>(defaultValue) ? defaultValue(input, argument) : defaultValue;
+    return typeof defaultValue === 'function' ? defaultValue(input, argument) : defaultValue;
   }
   return o;
 }
 
-export function validateCreateArgumentMapFnUndefinedResult<I extends MapKey, O, A = 'object'>(
+export function validateCreateArgumentMapFnUndefinedResult<I extends MapKey, O extends MapOutput, A = 'object'>(
   input: I,
   output: O | undefined,
   argument: A,
@@ -113,7 +98,7 @@ export function validateCreateArgumentMapFnUndefinedResult<I extends MapKey, O, 
     if (defaultValue === undefined) {
       return undefined;
     }
-    return isArgumentMapFnDefaultValueFn<I, O, A>(defaultValue) ? defaultValue(input, argument) : defaultValue;
+    return typeof defaultValue === 'function' ? defaultValue(input, argument) : defaultValue;
   }
   return o;
 }

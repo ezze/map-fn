@@ -1,7 +1,7 @@
-import { MapFn, MapFnOptions, MapFnUndefined, MapFnUndefinedOptions, MapKey } from './types.ts';
+import { MapFn, MapFnOptions, MapFnUndefined, MapFnUndefinedOptions, MapKey, MapOutput } from './types.ts';
 import { validateCreateMapFnResult, validateCreateMapFnUndefinedResult } from './utils.ts';
 
-export function createMapFn<I extends MapKey, O>(
+export function createMapFn<I extends MapKey, O extends MapOutput>(
   map: Partial<Record<I, O>>,
   createMapOptions?: MapFnOptions<I, O>
 ): MapFn<I, O> {
@@ -11,11 +11,11 @@ export function createMapFn<I extends MapKey, O>(
   };
 }
 
-export function createMapFnStrict<I extends MapKey, O>(map: Record<I, O>): MapFn<I, O> {
+export function createMapFnStrict<I extends MapKey, O extends MapOutput>(map: Record<I, O>): MapFn<I, O> {
   return createMapFn<I, O>(map);
 }
 
-export function createMapFnUndefined<I extends MapKey, O>(
+export function createMapFnUndefined<I extends MapKey, O extends MapOutput>(
   map: Partial<Record<I, O>>,
   createMapOptions?: MapFnUndefinedOptions<I, O>
 ): MapFnUndefined<I, O> {
@@ -25,6 +25,8 @@ export function createMapFnUndefined<I extends MapKey, O>(
   };
 }
 
-export function createMapFnStrictUndefined<I extends MapKey, O>(map: Record<I, O>): MapFnUndefined<I, O> {
+export function createMapFnStrictUndefined<I extends MapKey, O extends MapOutput>(
+  map: Record<I, O>
+): MapFnUndefined<I, O> {
   return createMapFnUndefined<I, O>(map);
 }
